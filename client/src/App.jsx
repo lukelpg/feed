@@ -4,22 +4,38 @@ function App() {
 
     const [data, setData] = useState([{}])
 
-    useEffect(() => {
-        fetch("/members").then(
-            res => res.json()
+    let members, res;
+
+    const tryGetData = {
+        run: function getData() {
             
-        ).then(
-            console.log("here"),
-            data => {
+            fetch("/members",{
+                method: 'GET', 
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    members: members
+                })
                 
-                setData(data)
-                
-                console.log(data)
-                
-            }
-            
-        )
-    }, [])
+            }).then((response) => {
+                const res = response.data
+                console.log(res)
+                setData(({
+                    profile_name: res.name,
+                }))
+            }).catch((error) => {
+                if (error.response) {
+                    console.log(error.response)
+                    console.log(error.response.status)
+                    console.log(error.response.headers)
+                }
+            })
+        }
+    }
+    
+    
+    tryGetData.run()
     
     return (
         <div>

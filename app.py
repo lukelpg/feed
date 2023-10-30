@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
@@ -6,11 +6,10 @@ app = Flask(__name__)
 # def hello_world():
 #     return "<p>Hello, World!</p>"
 
-@app.route('/members')
+@app.route('/members', methods=["GET"])
 def members():
-    return {
-        "members": ['Member1', 'Member2']
-    }
+    myString = jsonify("please work")
+    return myString
 
 # if __name__ == '__main__':
 #     app.run(debug=True)
