@@ -1,47 +1,35 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 
 function App() {
+  const [data, setData] = useState(null);
 
-    const [data, setData] = useState([{}])
-
-    let members, res;
-
-    const tryGetData = {
-        run: function getData() {
-            
-            fetch("/members",{
-                method: 'GET', 
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify({
-                    members: members
-                })
-                
-            }).then((response) => {
-                const res = response.data
-                console.log(res)
-                setData(({
-                    profile_name: res.name,
-                }))
-            }).catch((error) => {
-                if (error.response) {
-                    console.log(error.response)
-                    console.log(error.response.status)
-                    console.log(error.response.headers)
-                }
-            })
+  useEffect(() => {
+    // Define a function to fetch data from your Flask backend
+    async function fetchData() {
+      try {
+        const response = await fetch('/api/data');
+        if (response.ok) {
+          const jsonData = await response.json();
+          setData(jsonData);
+        } else {
+          throw new Error('Network response was not ok');
         }
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
-    
-    
-    tryGetData.run()
-    
-    return (
-        <div>
-            <p>Testing in jsx app return</p>
-        </div>
-    )
+
+    // Call the fetchData function when the component mounts
+    fetchData();
+  }, []); // The empty array means this effect runs once after the initial render
+
+  return (
+    <div>
+      <h1>React App</h1>
+      <p>Data from Flask:</p>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+    </div>
+  );
 }
 
-export default App
+export default App;

@@ -1,15 +1,15 @@
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
-# @app.route("/")
-# def hello_world():
-#     return "<p>Hello, World!</p>"
+@app.route('/api/data', methods=['GET'])
+def get_data():
+    data = {'message': 'This is the data you requested'}
+    response = jsonify(data)
+    response.headers['Content-Type'] = 'application/json'  # Set the Content-Type header
+    return response
 
-@app.route('/members', methods=["GET"])
-def members():
-    myString = jsonify("please work")
-    return myString
-
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
