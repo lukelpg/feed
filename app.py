@@ -1,5 +1,8 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
+import subprocess
+
+from time import sleep
 
 app = Flask(__name__)
 CORS(app)
@@ -14,6 +17,14 @@ def get_data():
 
 @app.route('/api/backend-action', methods=['GET'])
 def perform_backend_action():
+    # toggle_led()
+    # sleep(1) 
+    # print("LED is ON")
+    cmd = "sudo python3 -c \"from ledControl import toggle_led; toggle_led()\""  # Adjust the path as needed
+
+    # Run the script with sudo privileges
+    subprocess.run(cmd, shell=True)
+
     return jsonify({'message': 'Backend action performed'})
 
 if __name__ == '__main__':
