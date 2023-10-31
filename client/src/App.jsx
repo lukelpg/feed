@@ -8,6 +8,7 @@ function App() {
     async function fetchData() {
       try {
         const response = await fetch('/api/data');
+        console.log('Raw Response:', response)
         if (response.ok) {
           const jsonData = await response.json();
           setData(jsonData);
@@ -17,6 +18,8 @@ function App() {
       } catch (error) {
         console.error('Error:', error);
       }
+
+      
     }
 
     // Call the fetchData function when the component mounts
