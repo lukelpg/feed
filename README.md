@@ -11,3 +11,8 @@
 
 ## Running Client Side
 - npm run dev
+- npm run dev -- --host
+
+
+## Bug fixing venv/hardware:
+- `virtualenv --system-site-packages venv`
