@@ -1,7 +1,7 @@
-export const LedButton = (props) => {
+export const ServoButton = (props) => {
 	const handleButtonClick = () => {
 		// Send a GET request to the backend when the button is clicked
-		fetch('/api/backend-action', {
+		fetch('/api/servo-action', {
 		  method: 'GET',
 		})
 		  .then((response) => {
@@ -19,7 +19,7 @@ export const LedButton = (props) => {
 
 	return (
 		<div>
-			<button onClick={handleButtonClick}>Toggle LED</button>
+			<button onClick={handleButtonClick}>No double clicking</button>
 		</div>
 	)
 }

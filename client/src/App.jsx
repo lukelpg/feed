@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { LedButton } from './components/LedButton.jsx'
+import { ServoButton } from './components/ServoButton.jsx'
 
 function App() {
   const [data, setData] = useState(null);
@@ -30,6 +31,7 @@ function App() {
       <p>Data from Flask:</p>
       <pre>{JSON.stringify(data, null, 2)}</pre>
       <LedButton />
+      <ServoButton/>
     </div>
   );
 }
