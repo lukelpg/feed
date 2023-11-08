@@ -30,6 +30,9 @@ def tryGetEncoderData():
                 pickedVal = pos
                 # print("Button Pressed")
                 print("You picked", pickedVal, "units")
+                
+                with open("./data/encoderData.txt", "w") as file:
+                    file.write(str(pickedVal))
 
             # Check for encoder rotation
             if clk_state != clk_last_state:

@@ -11,6 +11,9 @@ import time
 from ledControl import toggle_led
 from servoControl import move_servo_min_to_max
 from encoder import tryGetEncoderData
+from analog import tryGetAnalog
+# import lcd
+# from lcd import demo_lcd
 
 timeOne = None
 timeTwo = None
@@ -90,5 +93,15 @@ if __name__ == '__main__':
 def background_thread():
     tryGetEncoderData()
 
-thread = threading.Thread(target=background_thread)
-thread.start()
+def analogThread():
+    tryGetAnalog()
+
+# def lcdThread():
+#     demo_lcd.tryWriteToLCD()
+
+thread1 = threading.Thread(target=background_thread)
+thread2 = threading.Thread(target=analogThread)
+# thread3 = threading.Thread(target=lcdThread)
+thread1.start()
+thread2.start()
+# thread3.start()
