@@ -1,5 +1,8 @@
 # Feed 
 
+# Luke 
+ - everything is murged but backend hardware file didnt want to merge cause i cant test
+
 ## Branch Explanation
 
 ### calllum, callan, and luke
@@ -32,7 +35,6 @@
     - pip install -r requirements.txt
     - virtualenv --system-site-packages venv
     - sudo -E venv/bin/flask run --host=0.0.0.0
-- LCD install stuff is: sudo sh install sh (figure out how we should do this, eg put this in the requirements?)
 
 ## Material UI for React (might not be required)
 - npm install @mui/material @emotion/react @emotion/styled
@@ -42,3 +44,6 @@
     - npm install
     - npm fund
     - npm run dev -- --host  
+
+    npm install react-router-dom@5
+    npm install --save-dev @types/react-router-dom

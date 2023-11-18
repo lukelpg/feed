@@ -2,4 +2,6 @@ flask
 flask_cors
 ntplib
 apscheduler
-mfrc522-python
+gpiozero
+RPi.GPIO
+flask-socketio

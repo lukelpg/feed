@@ -1,8 +1,19 @@
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import { ServoButton }from '../testing/servoButton.tsx'; 
+import { ServoButton }from '../buttons/servoButton.tsx'; 
+import { PortionButton }from '../buttons/setPortionButton.tsx'; 
 //import Slider from '@mui/material-next/Slider';
+
+import io from 'socket.io-client';
+
+const socket = io('http://ipToReplace:5000', {
+  withCredentials: true,
+  extraHeaders: {
+    "Access-Control-Allow-Origin": "http://ipToReplace:5000"
+  }
+});
+
 
 const marks = [
   {
@@ -55,6 +66,16 @@ const SliderComponent = () => {
     setPortionCount(portionCount + sliderValue);
   };
 
+  const handlePortionClick = () => {
+    // Update feedCount and portionCount when Servo On is clicked
+    setFeedCount(feedCount + 1);
+    setPortionCount(portionCount + sliderValue);
+  };
+
+  socket.on('portion_data', (data: number) => {
+    setSliderValue(data)
+  });
+
   return (
     <div>
       
@@ -77,10 +98,13 @@ const SliderComponent = () => {
           //color="primary"
         />
         <div>
-        <ServoButton sliderValue={sliderValue} onServoClick={handleServoClick} />
+        <PortionButton sliderValue={sliderValue} onPortionClick={handlePortionClick} />
+        <ServoButton onServoClick={handleServoClick} />
         Fed {feedCount} times
         <br/>
         Fed {portionCount} portions
+        <br/>
+        Current Portions: {sliderValue}
         </div> 
         
       </Box>

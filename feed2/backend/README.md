@@ -13,8 +13,11 @@
 
 # Backend/Server
 - Cd to server and run the commands:
-    - sudo python3 -m pip install -r requirements.txt --break-system-packages
-    - sudo flask run --host=0.0.0.0
+    - python3 -m venv venv
+    - source venv/bin/activate
+    - pip install -r requirements.txt
+    - virtualenv --system-site-packages venv
+    - sudo /home/pi/Desktop/feed/server/venv/bin/flask run --host=0.0.0.0
 
 
 
